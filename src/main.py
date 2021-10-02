@@ -11,7 +11,6 @@ import random
 
 
 import tools as helper
-from PIL import Image
 
 
 #change the path absoluteness and the use of links
@@ -45,13 +44,17 @@ def image_tag_to_point_cloud_bw(img_path):
     width = 480, height = 640)
     """
     np_img = np.array(img)
+
     print(img)
+
     print(np_img.shape)
+
+    print(np_img)
     
     x,y,z = np_img.shape
     
-    randomlist1 = random.sample(range(0, x), x)
-    randomlist2 = random.sample(range(0, y), y)
+    #randomlist1 = random.sample(range(0, x), x)
+    #randomlist2 = random.sample(range(0, y), y)
     
     img_points = []
     img_colours = []
@@ -64,10 +67,14 @@ def image_tag_to_point_cloud_bw(img_path):
     for i in range(x):
         for j in range(y):
             sum = int(np_img[i][j][0]) + int(np_img[i][j][1]) + int(np_img[i][j][2])
+
             #sum = np_img[i][j][0]
             #print(sum)
+            
+            print(int(np_img[i][j][0]) ," ", int(np_img[i][j][1]) ," ", int(np_img[i][j][2]))
+            
             img_points.append([i/x,j/y,0.])
-            if(sum == 0):
+            if(sum <= 360):
                 #print(sum)
                 img_colours.append([0.,0.,0.])
             else:
@@ -84,9 +91,67 @@ def image_tag_to_point_cloud_bw(img_path):
     return pcd
 
 
+
+def image_tag_to_point_cloud(img_path):
+    """
+    Convert image of apriltag to point cloud.
+    """
+    
+    img = o3d.io.read_image(img_path)
+
+    o3d.visualization.draw_geometries([img],
+    width = 480, height = 640)
+
+    np_img = np.array(img)
+
+    print(img)
+
+    print(np_img.shape)
+
+    print(np_img)
+    
+    x,y,z = np_img.shape
+
+    img_points = []
+    img_colours = []
+    
+    
+
+    #sys.exit()
+
+
+    for i in range(x):
+        for j in range(y):
+            sum = int(np_img[i][j][0]) + int(np_img[i][j][1]) + int(np_img[i][j][2])
+
+            #sum = np_img[i][j][0]
+            #print(sum)
+            
+            print(int(np_img[i][j][0]) ," ", int(np_img[i][j][1]) ," ", int(np_img[i][j][2]))
+            
+            img_points.append([i/x,j/y,0.])
+            
+            r = int(np_img[i][j][0]) / 255.
+            g = int(np_img[i][j][1]) / 255.
+            b = int(np_img[i][j][2]) / 255.
+
+            img_colours.append([r,g,b])
+
+                
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(img_points)
+    pcd.colors = o3d.utility.Vector3dVector(img_colours)
+    
+    
+    o3d.visualization.draw_geometries([pcd],width = 480, height = 720)
+    
+    return pcd
+
+
 def main():
     image_path = helper.parse_cmd_line()
-    image_tag_to_point_cloud_bw(image_path)
+    #image_tag_to_point_cloud_bw(image_path)
+    image_tag_to_point_cloud(image_path)
     return 0
 
 
