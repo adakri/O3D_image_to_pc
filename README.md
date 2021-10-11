@@ -14,5 +14,5 @@ An example of use, this is an image:
 
 This its associated point cloud (> :interrobang: the resolution is fixed, no compression is done and it takes some time, but it works)
 <p align="center">
-	<img src="https://github.com/adakri/O3D_image_to_pc/blob/master/img/result?raw=true" width="640" height="480">
+	<img src="https://github.com/adakri/O3D_image_to_pc/blob/master/img/result.png?raw=true" width="640" height="480">
 </p>
