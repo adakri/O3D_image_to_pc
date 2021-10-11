@@ -1,6 +1,8 @@
 Package             Version   Location                                                          Installer
 ------------------- --------- ----------------------------------------------------------------- ---------
+about-time          3.1.1     /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 addict              2.4.0     /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
+alive-progress      2.0.0     /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 anyio               3.3.2     /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 argon2-cffi         21.1.0    /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 attrs               21.2.0    /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
@@ -16,6 +18,7 @@ decorator           5.1.0     /home/abdel_dakri/work/Python/o3d_env/lib/python3.
 defusedxml          0.7.1     /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 deprecation         2.1.0     /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 entrypoints         0.3       /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
+grapheme            0.6.0     /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 idna                3.2       /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 ipykernel           6.4.1     /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      
 ipython             7.28.0    /home/abdel_dakri/work/Python/o3d_env/lib/python3.8/site-packages pip      

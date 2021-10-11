@@ -2,6 +2,8 @@
 import open3d as o3d
 import numpy as np
 import visualise as vis
+from PIL import Image
+from alive_progress import alive_bar
 
 
 import sys
@@ -62,8 +64,7 @@ def image_tag_to_point_cloud_bw(img_path):
     
 
     #sys.exit()
-
-
+    
     for i in range(x):
         for j in range(y):
             sum = int(np_img[i][j][0]) + int(np_img[i][j][1]) + int(np_img[i][j][2])
@@ -119,23 +120,26 @@ def image_tag_to_point_cloud(img_path):
 
     #sys.exit()
 
+    items = range(x+y)
+    with alive_bar(len(items)) as bar: 
+        for i in range(x):
+            for j in range(y):
+                sum = int(np_img[i][j][0]) + int(np_img[i][j][1]) + int(np_img[i][j][2])
 
-    for i in range(x):
-        for j in range(y):
-            sum = int(np_img[i][j][0]) + int(np_img[i][j][1]) + int(np_img[i][j][2])
+                #sum = np_img[i][j][0]
+                #print(sum)
+                
+                #print(int(np_img[i][j][0]) ," ", int(np_img[i][j][1]) ," ", int(np_img[i][j][2]))
+                
+                img_points.append([i/x,j/y,0.])
+                
+                r = int(np_img[i][j][0]) / 255.
+                g = int(np_img[i][j][1]) / 255.
+                b = int(np_img[i][j][2]) / 255.
 
-            #sum = np_img[i][j][0]
-            #print(sum)
-            
-            print(int(np_img[i][j][0]) ," ", int(np_img[i][j][1]) ," ", int(np_img[i][j][2]))
-            
-            img_points.append([i/x,j/y,0.])
-            
-            r = int(np_img[i][j][0]) / 255.
-            g = int(np_img[i][j][1]) / 255.
-            b = int(np_img[i][j][2]) / 255.
+                img_colours.append([r,g,b])
 
-            img_colours.append([r,g,b])
+                bar()
 
                 
     pcd = o3d.geometry.PointCloud()
@@ -151,8 +155,8 @@ def image_tag_to_point_cloud(img_path):
 def main():
     image_path = helper.parse_cmd_line()
     #image_tag_to_point_cloud_bw(image_path)
-    image_tag_to_point_cloud(image_path)
-    return 0
+    pcd = image_tag_to_point_cloud(image_path)
+    o3d.io.write_triangle_mesh("./results/image_pcd.ply", pcd)
 
 
 if __name__ == "__main__": 
